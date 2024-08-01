@@ -6,6 +6,7 @@ if [ ! -d slurm ]; then
     tar xvjf slurm-latest.tar.bz2
     mv "$(ls -d slurm-*/ | head -1)" slurm
     sed -i '/^\s*dh_auto_configure/s/$/ --with-mysql_config=\/usr\/bin --with-munge=no/' slurm/debian/rules
+    sed -i '/munge/d' slurm/debian/control
 fi
 
 mkdir -p $(pwd)/build
