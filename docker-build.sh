@@ -9,6 +9,19 @@ if [ ! -d slurm ]; then
     sed -i '/munge/d' slurm/debian/control
 fi
 
+# set the revision number
+if [ ! -z "$1" ]; then
+  sed -i "s/(\([^-]*\)-[^)]*)/(\1-$1)/" slurm/debian/changelog
+fi
+
+head -n 1 slurm/debian/changelog
+read -p "Are the version and build revision correct? (y/n): " yn
+case $yn in
+    [Yy]* ) break;;
+    [Nn]* ) exit;;
+    * ) echo "Please answer yes or no.";;
+esac
+
 mkdir -p $(pwd)/build
 docker build -t slurm-package .
 docker run --rm -v $(pwd)/slurm:/input -v $(pwd)/build:/output slurm-package
