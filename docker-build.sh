@@ -23,5 +23,5 @@ case $yn in
 esac
 
 mkdir -p $(pwd)/build
-docker build -t slurm-package .
+docker build --no-cache -t slurm-package .
 docker run --rm -v $(pwd)/slurm:/input -v $(pwd)/build:/output slurm-package
