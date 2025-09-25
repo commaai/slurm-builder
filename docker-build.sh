@@ -17,7 +17,7 @@ fi
 head -n 1 slurm/debian/changelog
 read -p "Are the version and build revision correct? (y/n): " yn
 case $yn in
-    [Yy]* ) break;;
+    [Yy]* ) ;;
     [Nn]* ) exit;;
     * ) echo "Please answer yes or no.";;
 esac
